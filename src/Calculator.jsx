@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Display from './Display';
 import CalculatorButton from './CalculatorButton';
+import styles from './Calculator.module.css';
 
 function Calculator() {
   const [input, setInput] = useState('');
@@ -13,8 +14,6 @@ function Calculator() {
   const [operatorBeforeNegative, setOperatorBeforeNegative] = useState('');
   const [pendingOperator, setPendingOperator] = useState('');
   const [applyNegative, setApplyNegative] = useState(false);
-
-  //   console.log(currentOperation, 'current operation');
 
   const digits = {
     0: 'zero',
@@ -151,8 +150,8 @@ function Calculator() {
   };
 
   return (
-    <div>
-      <Display value={input || output || '0'} />
+    <div className={styles.calculator}>
+      <Display value={input || output || '0'} className={styles.display} />
 
       {Object.entries(digits).map(([key, value]) => (
         <CalculatorButton
@@ -160,42 +159,50 @@ function Calculator() {
           text={key}
           id={value}
           onClick={() => handleNumberClick(key)}
+          className={styles.button}
         />
       ))}
       <CalculatorButton
         text='+'
         id='add'
         onClick={() => handleOperationClick('+')}
+        className={styles.button}
       />
       <CalculatorButton
         text='-'
         id='subtract'
         onClick={() => handleNegativeClick()}
+        className={styles.button}
       />
       <CalculatorButton
         text='*'
         id='multiply'
         onClick={() => handleOperationClick('*')}
+        className={styles.button}
       />
       <CalculatorButton
         text='/'
         id='divide'
         onClick={() => handleOperationClick('/')}
+        className={styles.button}
       />
       <CalculatorButton
         text='C'
         id='clear'
         onClick={() => handleClearClick()}
+        className={styles.button}
       />
       <CalculatorButton
         text='.'
         id='decimal'
         onClick={() => handleDecimalClick()}
+        className={styles.button}
       />
       <CalculatorButton
         text='='
         id='equals'
         onClick={() => handleEqualsClick(input, intermediateValue)}
+        className={styles.button}
       />
     </div>
   );
